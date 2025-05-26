@@ -1,0 +1,23 @@
+{
+  "name": "software-eng-main",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Taofeek26/Software-Eng.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Taofeek26/Software-Eng/issues"
+  },
+  "homepage": "https://github.com/Taofeek26/Software-Eng#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
