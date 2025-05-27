@@ -1,0 +1,20 @@
+{
+  "name": "3mtt-backend-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "express",
+    "backend",
+    "3mtt"
+  ],
+  "author": "Taofeek Abdulrauf",
+  "license": "ISC",
+  "description": "An Express.js backend project for the 3MTT (3 Months to Tech) program.",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
