@@ -1,0 +1,194 @@
+/* src/pages/MovieDetailPage.css */
+.movie-detail-page {
+    /* padding: 20px; */ /* Handled by MainLayout now */
+}
+
+.backdrop-container {
+    height: 60vh; /* Adjust as needed */
+    background-size: cover;
+    background-position: center center;
+    margin: -20px -20px 0 -20px; /* Extend to edges if main-content has padding */
+    position: relative; /* For potential overlays */
+}
+.backdrop-container::after { /* Optional: Dark overlay for text readability if text is on backdrop */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+}
+
+
+.movie-content-wrapper {
+    padding: 20px;
+    background-color: #fff; /* Or a light theme color */
+    position: relative; /* To sit above backdrop or manage its own flow */
+    margin-top: -150px; /* Pull content up over the backdrop; adjust as needed */
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    max-width: 1000px; /* Limit width within the centered main content area */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.movie-header {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+    align-items: flex-start; /* Align items to the start for varying text lengths */
+}
+
+.movie-detail-poster {
+    width: 300px; /* Fixed width for poster */
+    height: auto;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.movie-header-info {
+    flex-grow: 1;
+}
+
+.movie-header-info h1 {
+    margin-top: 0;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.tagline {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.genres {
+    margin-bottom: 1rem;
+}
+
+.genre-tag {
+    background-color: #eee;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-right: 5px;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.movie-overview, .movie-reviews-section, .movie-cast {
+    margin-bottom: 30px;
+}
+
+.movie-overview h2, .movie-reviews-section h2, .movie-cast h2 {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.reviews-list {
+    list-style: none;
+    padding: 0;
+}
+
+.review-item {
+    background-color: #f9f9f9;
+    border: 1px solid #e9e9e9;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.review-item p {
+    margin: 5px 0;
+}
+.review-item small {
+    color: #777;
+    font-size: 0.85em;
+}
+
+/* Basic Cast Styling Example */
+.movie-cast {
+    /* Add styles for cast display */
+}
+.cast-member {
+    display: inline-block; /* Or use flex/grid */
+    width: 150px;
+    margin: 10px;
+    text-align: center;
+}
+.cast-member img {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    .movie-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .movie-detail-poster {
+        width: 80%;
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+    .movie-content-wrapper {
+        margin-top: -50px; /* Adjust for smaller backdrop effect */
+    }
+}
+
+/* src/pages/MovieDetailPage.css */
+/* ... existing styles ... */
+
+.action-button {
+    padding: 10px 15px;
+    margin-top: 15px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.favorite-button-detail {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+}
+.favorite-button-detail.active {
+    background-color: #ffc107;
+    color: #333;
+    border-color: #f0b300;
+}
+.favorite-button-detail:hover:not(.active) {
+    background-color: #e0e0e0;
+}
+.review-actions {
+    margin-top: 10px;
+}
+.review-actions button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.edit-review-button {
+    background-color: #ffc107; /* Yellow for edit */
+    color: #333;
+    border: 1px solid #f0b300;
+}
+.delete-review-button {
+    background-color: #dc3545; /* Red for delete */
+    color: white;
+    border: 1px solid #c82333;
+}

@@ -1,0 +1,46 @@
+/* src/components/Watchlist/WatchlistForm.css */
+.watchlist-form {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+
+.watchlist-form h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.form-group-inline {
+    display: flex;
+    gap: 10px;
+}
+
+.form-group-inline input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group-inline button {
+    padding: 8px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.form-group-inline button:hover {
+    background-color: #218838;
+}
+.form-group-inline button:disabled {
+    background-color: #aaa;
+}
+
+.error-message.small-error { /* For forms within sections */
+    font-size: 0.9em;
+    padding: 8px;
+    margin-bottom: 10px;
+}
