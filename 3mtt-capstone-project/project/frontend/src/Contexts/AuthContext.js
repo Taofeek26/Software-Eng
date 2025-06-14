@@ -1,6 +1,6 @@
 // src/contexts/AuthContext.js
 import React, { createContext, useState, useEffect, useCallback } from 'react';
-import { getCurrentUserProfile } from '../Serivices/apiService'; // To fetch user data if token exists
+import { getCurrentUserProfile } from '../Services/apiService'; // To fetch user data if token exists
 
 export const AuthContext = createContext(null);
 

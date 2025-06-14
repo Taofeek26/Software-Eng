@@ -1,6 +1,6 @@
 // src/pages/HomePage.js
 import React, { useState, useEffect } from 'react';
-import { getPopularMovies } from '../Serivices/apiService';
+import { getPopularMovies } from '../Services/apiService';
 import MovieCard from '../Components/Movies/MovieCard'; // We'll create this
 import './HomePage.css';
 

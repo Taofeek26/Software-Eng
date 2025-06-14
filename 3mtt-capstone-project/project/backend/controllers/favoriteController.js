@@ -6,7 +6,7 @@ exports.getUserFavorites = async (req, res) => {
     const userId = req.user.userId;
     try {
         const result = await db.query(
-            'SELECT id, tmdb_movie_id, title, poster_path, added_at FROM favorites WHERE user_id = $1 ORDER BY added_at DESC',
+            'SELECT id, tmdb_movie_id as "tmdbMovieId", title, poster_path as "posterPath", added_at as "addedAt" FROM favorites WHERE user_id = $1 ORDER BY added_at DESC',
             [userId]
         );
         res.json(result.rows);

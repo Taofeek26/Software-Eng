@@ -1,7 +1,7 @@
 // src/pages/RegisterPage.js
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { registerUser } from '../Serivices/apiService'; // Adjust the import path as necessary
+import { registerUser } from '../Services/apiService'; // Adjust the import path as necessary
 import { AuthContext } from '../Contexts/AuthContext'; // Adjust the import path as necessary
 import './AuthForm.css'; // Reuse the same CSS
 

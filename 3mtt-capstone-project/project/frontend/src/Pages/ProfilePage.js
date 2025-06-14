@@ -1,11 +1,11 @@
 // src/pages/ProfilePage.js
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../Contexts/AuthContext';
-import { updateUserProfile } from '../Serivices/apiService'; // You have this
+import { updateUserProfile } from '../Services/apiService'; // You have this
 import './ProfilePage.css';
 import MovieCard from '../Components/Movies/MovieCard'; // For displaying favorites/reviews
 import CreateWatchlistForm from '../Components/WatchList/CreateWatchlistForm'; // Import
-import { /* other apiService functions, */ deleteWatchlist, removeMovieFromWatchlist, getCurrentUserProfile } from '../Serivices/apiService';
+import { /* other apiService functions, */ deleteWatchlist, removeMovieFromWatchlist, getCurrentUserProfile } from '../Services/apiService';
 
 const ProfilePage = () => {
     const { user, token, login: updateUserContext } = useContext(AuthContext); // login updates context

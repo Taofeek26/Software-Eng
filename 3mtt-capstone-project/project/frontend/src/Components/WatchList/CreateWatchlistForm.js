@@ -1,6 +1,6 @@
 // src/components/Watchlist/CreateWatchlistForm.js
 import React, { useState } from 'react';
-import { createWatchlist } from '../../Serivices/apiService'; // Adjust the import path as necessary
+import { createWatchlist } from '../../Services/apiService'; // Adjust the import path as necessary
 import './WatchlistForm.css'; // Create this
 
 const CreateWatchlistForm = ({ onWatchlistCreated }) => {

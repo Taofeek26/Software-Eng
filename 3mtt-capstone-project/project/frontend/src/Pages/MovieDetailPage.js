@@ -2,10 +2,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../Contexts/AuthContext';
 import { useParams } from 'react-router-dom';
-import { getMovieDetails, getMovieReviews, removeFavorite, addFavorite} from '../Serivices/apiService'; // Assuming you add getMovieReviews
+import { getMovieDetails, getMovieReviews, removeFavorite, addFavorite} from '../Services/apiService'; // Assuming you add getMovieReviews
 import './MovieDetailPage.css';
 import ReviewForm from '../Components/Review/ReviewForm'; // Import
-import { /* other apiService, */ deleteReview, getCurrentUserProfile } from '../Serivices/apiService';
+import { /* other apiService, */ deleteReview, getCurrentUserProfile } from '../Services/apiService';
 import AddToWatchlistModal from '../Components/WatchList/AddToWatchlistModal'; // Corrected import
 
 const MovieDetailPage = () => {

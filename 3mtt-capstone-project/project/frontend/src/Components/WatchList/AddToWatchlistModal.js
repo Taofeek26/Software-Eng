@@ -1,7 +1,7 @@
 // src/components/Watchlist/AddToWatchlistModal.js
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../Contexts/AuthContext';
-import { addMovieToWatchlist, getCurrentUserProfile } from '../../Serivices/apiService';
+import { addMovieToWatchlist, getCurrentUserProfile } from '../../Services/apiService';
 import './AddToWatchlistModal.css'; // Create this
 
 const AddToWatchlistModal = ({ movie, onClose }) => {

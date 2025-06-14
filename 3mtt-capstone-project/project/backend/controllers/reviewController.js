@@ -24,29 +24,54 @@ exports.getReviewsForMovie = async (req, res) => {
 // POST /api/movies/:tmdbMovieId/reviews
 exports.createReview = async (req, res) => {
     const userId = req.user.userId;
-    const { tmdbMovieId } = req.params; // <--- THIS IS WHERE IT'S EXTRACTED
+    const { tmdbMovieId } = req.params;
     const { rating, comment } = req.body;
 
     // SERVER-SIDE VALIDATION
     if (!tmdbMovieId) {
-        // This would likely result in a routing error before even hitting this controller
-        // if the route is defined as /:tmdbMovieId/ and no ID is provided in the URL.
-        // However, if it somehow reached here as undefined (e.g. if the param name was misspelled in the route)
         return res.status(400).json({ message: 'Movie ID is required in the URL path.' });
     }
 
-    // Your existing validation for rating
-    if (rating === undefined || rating === null) { /* ... */ }
-    // ...
+    // Validate rating
+    if (rating === undefined || rating === null) {
+        return res.status(400).json({ message: 'Rating is required' });
+    }
+    if (typeof rating !== 'number' || rating < 1 || rating > 5) {
+        return res.status(400).json({ message: 'Rating must be a number between 1 and 5' });
+    }
 
     try {
-        const result = await db.query(
-            // Make sure you are parsing tmdbMovieId correctly if it's a string from params
-            'INSERT INTO reviews (user_id, tmdb_movie_id, rating, comment) VALUES ($1, $2, $3, $4) ON CONFLICT (user_id, tmdb_movie_id) DO UPDATE SET rating = EXCLUDED.rating, comment = EXCLUDED.comment, updated_at = CURRENT_TIMESTAMP RETURNING ...',
-            [userId, parseInt(tmdbMovieId), rating, comment || null]
+        // Check if user already reviewed this movie
+        const existingReview = await db.query(
+            'SELECT id FROM reviews WHERE user_id = $1 AND tmdb_movie_id = $2',
+            [userId, parseInt(tmdbMovieId)]
         );
-        // ...
-    } catch (error) { /* ... */ }
+
+        if (existingReview.rows.length > 0) {
+            // Update existing review
+            const result = await db.query(
+                'UPDATE reviews SET rating = $1, comment = $2, updated_at = CURRENT_TIMESTAMP WHERE user_id = $3 AND tmdb_movie_id = $4 RETURNING id, rating, comment, created_at, updated_at',
+                [rating, comment || null, userId, parseInt(tmdbMovieId)]
+            );
+            return res.status(200).json({
+                message: 'Review updated successfully',
+                review: result.rows[0]
+            });
+        } else {
+            // Create new review
+            const result = await db.query(
+                'INSERT INTO reviews (user_id, tmdb_movie_id, rating, comment) VALUES ($1, $2, $3, $4) RETURNING id, rating, comment, created_at, updated_at',
+                [userId, parseInt(tmdbMovieId), rating, comment || null]
+            );
+            return res.status(201).json({
+                message: 'Review created successfully',
+                review: result.rows[0]
+            });
+        }
+    } catch (error) {
+        console.error('Error creating/updating review:', error);
+        res.status(500).json({ message: 'Server error', details: error.message });
+    }
 };
 
 // PUT /api/reviews/:reviewId

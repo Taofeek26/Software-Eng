@@ -23,9 +23,9 @@ exports.registerUser = async (req, res) => {
             return res.status(400).json({ message: 'User with this email or username already exists' });
         }
 
-        // Hash password
-        const salt = await bcrypt.genSalt(10);
-        const password_hash = await bcrypt.hash(password, salt);
+        // Hash password with stronger rounds
+        const saltRounds = parseInt(process.env.BCRYPT_ROUNDS) || 12;
+        const password_hash = await bcrypt.hash(password, saltRounds);
 
         // Insert new user -  UPDATE THIS QUERY
         const newUserResult = await db.query(

@@ -24,6 +24,21 @@ apiClient.interceptors.request.use(
     }
 );
 
+// Response interceptor for error handling
+apiClient.interceptors.response.use(
+    (response) => {
+        return response;
+    },
+    (error) => {
+        if (error.response?.status === 401) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = '/login';
+        }
+        return Promise.reject(error);
+    }
+);
+
 export const getPopularMovies = (page = 1) => {
     return apiClient.get(`/movies/popular?page=${page}`);
 };

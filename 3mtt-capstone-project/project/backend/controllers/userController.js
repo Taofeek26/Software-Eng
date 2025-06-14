@@ -14,7 +14,7 @@ exports.getCurrentUserProfile = async (req, res) => {
         const userProfile = userResult.rows[0];
 
         // Fetch user's favorites
-        const favoritesResult = await db.query('SELECT tmdb_movie_id, title, poster_path, added_at FROM favorites WHERE user_id = $1 ORDER BY added_at DESC', [userId]);
+        const favoritesResult = await db.query('SELECT tmdb_movie_id as "tmdbMovieId", title, poster_path as "posterPath", added_at as "addedAt" FROM favorites WHERE user_id = $1 ORDER BY added_at DESC', [userId]);
         userProfile.favorites = favoritesResult.rows;
 
         // Fetch user's watchlists
@@ -22,7 +22,7 @@ exports.getCurrentUserProfile = async (req, res) => {
         // For each watchlist, fetch its movies (can be N+1, consider JOINs for optimization later)
         for (let watchlist of watchlistsResult.rows) {
             const moviesResult = await db.query(
-                'SELECT tmdb_movie_id, title, poster_path, added_at FROM watchlist_movies WHERE watchlist_id = $1 ORDER BY added_at DESC',
+                'SELECT tmdb_movie_id as "tmdbMovieId", title, poster_path as "posterPath", added_at as "addedAt" FROM watchlist_movies WHERE watchlist_id = $1 ORDER BY added_at DESC',
                 [watchlist.id]
             );
             watchlist.movies = moviesResult.rows;
@@ -31,7 +31,7 @@ exports.getCurrentUserProfile = async (req, res) => {
 
 
         // Fetch user's reviews
-        const reviewsResult = await db.query('SELECT id, tmdb_movie_id, rating, comment, created_at, updated_at FROM reviews WHERE user_id = $1 ORDER BY created_at DESC', [userId]);
+        const reviewsResult = await db.query('SELECT id as "reviewId", tmdb_movie_id as "tmdbMovieId", rating, comment, created_at as "createdAt", updated_at as "updatedAt" FROM reviews WHERE user_id = $1 ORDER BY created_at DESC', [userId]);
         userProfile.reviews = reviewsResult.rows;
 
 

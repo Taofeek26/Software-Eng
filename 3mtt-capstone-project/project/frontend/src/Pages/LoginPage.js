@@ -1,7 +1,7 @@
 // src/pages/LoginPage.js
 import React, { useState, useContext } from 'react'; // We'll add AuthContext
 import { useNavigate, Link } from 'react-router-dom';
-import { loginUser } from '../Serivices/apiService';
+import { loginUser } from '../Services/apiService';
 import { AuthContext } from '../Contexts/AuthContext'; // Create this next
 import './AuthForm.css';
 

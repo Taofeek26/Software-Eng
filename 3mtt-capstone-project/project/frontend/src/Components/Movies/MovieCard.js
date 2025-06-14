@@ -2,7 +2,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthContext';
-import { addFavorite, removeFavorite, getCurrentUserProfile } from '../../Serivices/apiService'; // Assuming profile data not always fresh for favorites list
+import { addFavorite, removeFavorite, getCurrentUserProfile } from '../../Services/apiService'; // Assuming profile data not always fresh for favorites list
 import './MovieCard.css';
 import AddToWatchlistModal from '../WatchList/AddToWatchlistModal'; // Corrected import
 
