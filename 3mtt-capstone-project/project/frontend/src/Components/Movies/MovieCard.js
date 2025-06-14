@@ -57,12 +57,12 @@ const MovieCard = ({ movie }) => {
     };
 
     const posterBaseUrl = 'https://image.tmdb.org/t/p/w500';
-    const placeholderImage = 'https://via.placeholder.com/500x750?text=No+Image';
+    // const placeholderImage = 'https://via.placeholder.com/500x750?text=No+Image';
 
     return (
         <div className="movie-card">
             <Link to={`/movie/${movie.id}`}>
-                <img /* ... */ />
+                <img src={posterBaseUrl} alt={movie.title} />
                 <div className="movie-info">
                     <h3 className="movie-title">{movie.title}</h3>
                     <p className="movie-rating">Rating: {movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}</p>

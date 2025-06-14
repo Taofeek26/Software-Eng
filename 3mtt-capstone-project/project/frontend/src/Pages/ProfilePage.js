@@ -48,6 +48,7 @@ const ProfilePage = () => {
                 refreshUserProfile(); // Refresh to show changes
             } catch (err) {
                 console.error("Error deleting watchlist:", err);
+                console.error("user:", user);
                 alert(err.response?.data?.message || "Failed to delete watchlist.");
             }
         }
