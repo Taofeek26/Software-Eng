@@ -16,13 +16,26 @@ const db = require('./config/db');
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// Security middleware
-app.use(cors({
-    origin: process.env.NODE_ENV === 'production' 
-        ? ['https://your-frontend-app.vercel.app'] 
-        : ['http://localhost:3000', 'http://127.0.0.1:3000'],
+const whitelist = process.env.CORS_ORIGIN_WHITELIST ? process.env.CORS_ORIGIN_WHITELIST.split(',') : [];
+
+// --- ADD THIS LINE FOR DEBUGGING ---
+console.log('CORS Whitelist:', whitelist);
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        // OR if the origin is in our whitelist
+        if (!origin || whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
-}));
+};
+
+// Security middleware
+app.use(cors(corsOptions)); // Use the dynamic options
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: false, limit: '10mb' }));
