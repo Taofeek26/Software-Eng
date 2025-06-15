@@ -80,3 +80,28 @@ exports.fetchTrendingMovies = async (req, res) => {
         res.status(500).json({ message: error.message || 'Error fetching trending movies' });
     }
 };
+
+exports.fetchTopRatedMovies = async (req, res) => {
+    try {
+        const page = req.query.page || 1;
+        // This assumes you have a getTopRatedMovies function in your tmdbService
+        const data = await tmdbService.getTopRatedMovies(page); 
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching top-rated movies:', error);
+        res.status(500).json({ message: error.message || 'Error fetching top-rated movies' });
+    }
+};
+
+exports.fetchMovieVideos = async (req, res) => {
+    try {
+        const movieId = req.params.tmdbMovieId;
+        const data = await tmdbService.getMovieVideos(movieId);
+        if (!data) {
+            return res.status(404).json({ message: 'No trailer found for this movie.' });
+        }
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({ message: error.message || 'Error fetching movie videos' });
+    }
+};

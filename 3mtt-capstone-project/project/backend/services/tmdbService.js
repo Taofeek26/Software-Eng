@@ -79,6 +79,36 @@ exports.getTrendingMovies = async (timeWindow = 'day', page = 1) => {
     }
 };
 
+exports.getTopRatedMovies = async (page = 1) => {
+    if (!TMDB_API_KEY) throw new Error("TMDB API Key is missing.");
+    try {
+        const response = await tmdbAxiosInstance.get('/movie/top_rated', {
+            params: { page },
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching top-rated movies from TMDB:', error.response ? error.response.data : error.message);
+        throw new Error('Failed to fetch top-rated movies');
+    }
+};
+
+exports.getMovieVideos = async (movieId) => {
+    if (!TMDB_API_KEY) throw new Error("TMDB API Key is missing.");
+    try {
+        const response = await tmdbAxiosInstance.get(`/movie/${movieId}/videos`);
+        // Filter for official Trailers on YouTube for the best result
+        const trailer = response.data.results.find(
+            (video) => video.site === 'YouTube' && video.type === 'Trailer'
+        );
+        // Fallback to any other video if no official trailer is found
+        return trailer || response.data.results[0] || null;
+    } catch (error) {
+        console.error(`Error fetching videos for movie ${movieId} from TMDB:`, error.message);
+        // It's okay to return null if no videos are found, not a critical error
+        return null;
+    }
+};
+
 exports.getGenres = async () => {
     if (!TMDB_API_KEY) throw new Error("TMDB API Key is missing.");
     try {
